@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>HTML & CSS — Basics to Advanced (Live Project) | $60</title>
+  <meta name="description" content="Interactive flyer for an HTML & CSS course: basics to advanced with a live project, recorded sessions, fixed-time classes, detailed learning, and how to earn." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --bg:#0b1220;
+      --card:#0f172a;
+      --soft:#111a2e;
+      --text:#e6edf6;
+      --muted:#9fb0c5;
+      --brand:#14b8a6; /* teal-500 */
+      --brand-2:#6366f1; /* indigo-500 */
+      --accent:#22d3ee; /* cyan-400 */
+      --ok:#10b981;
+      --warn:#f59e0b;
+      --danger:#ef4444;
+      --radius:22px;
+      --shadow:0 10px 30px rgba(2,8,23,.35);
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0; 
+      font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;
+      color:var(--text);
+      background:
+        radial-gradient(1200px 600px at 10% -10%, rgba(20,184,166,.25), transparent 60%),
+        radial-gradient(1200px 600px at 110% 10%, rgba(99,102,241,.18), transparent 60%),
+        linear-gradient(180deg, #0b1220 0%, #0b1220 100%);
+    }
+    a{color:inherit;text-decoration:none}
+    .wrap{max-width:1100px;margin:0 auto;padding:24px}
+    .hero{position:relative;overflow:hidden;border-radius:var(--radius);padding:28px;background:linear-gradient(145deg, rgba(20,184,166,.15), rgba(99,102,241,.12));border:1px solid rgba(148,163,184,.15);box-shadow:var(--shadow)}
+    .hero-grid{display:grid;grid-template-columns:1.2fr .8fr;gap:24px}
+    .badge{display:inline-flex;align-items:center;gap:8px;padding:8px 12px;border-radius:999px;background:rgba(20,184,166,.15);border:1px solid rgba(20,184,166,.35);color:#d1faf5;font-weight:600;font-size:13px;margin-bottom:12px}
+    .title{font-size:clamp(28px,4vw,44px);line-height:1.06;margin:6px 0 12px;font-weight:800;letter-spacing:-.02em}
+    .subtitle{color:var(--muted);font-size:clamp(14px,2.2vw,17px);max-width:60ch}
+    .features{display:flex;flex-wrap:wrap;gap:10px;margin-top:14px}
+    .chip{display:inline-flex;align-items:center;gap:8px;padding:9px 12px;border:1px solid rgba(148,163,184,.22);background:rgba(15,23,42,.6);border-radius:12px;font-size:13px}
+    .price-card{align-self:stretch;background:var(--card);border:1px solid rgba(148,163,184,.18);border-radius:18px;padding:18px;box-shadow:var(--shadow)}
+    .price{font-size:46px;font-weight:900;letter-spacing:-.02em}
+    .cta{display:flex;gap:10px;margin-top:12px}
+    .btn{cursor:pointer;display:inline-flex;align-items:center;justify-content:center;gap:10px;padding:12px 16px;border-radius:12px;border:1px solid transparent;font-weight:700}
+    .btn.primary{background:linear-gradient(135deg, var(--brand), var(--brand-2));color:white}
+    .btn.ghost{background:transparent;border-color:rgba(148,163,184,.28);color:var(--text)}
+    .mini{font-size:12px;color:var(--muted);margin-top:8px}
+
+    .tabs{margin-top:26px;background:var(--soft);border:1px solid rgba(148,163,184,.16);border-radius:18px}
+    .tab-head{display:flex;flex-wrap:wrap}
+    .tab-btn{flex:1;min-width:180px;background:transparent;border:none;color:var(--muted);padding:14px 16px;font-weight:700;cursor:pointer;border-bottom:1px solid rgba(148,163,184,.12)}
+    .tab-btn.active{color:#e0e7ff;background:linear-gradient(90deg, rgba(20,184,166,.18), rgba(99,102,241,.18));}
+    .tab-panels{padding:18px}
+    .panel{display:none}
+    .panel.active{display:block}
+
+    .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+    .card{background:var(--card);border:1px solid rgba(148,163,184,.18);border-radius:16px;padding:14px}
+    .card h4{margin:2px 0 6px}
+    .list{margin:0;padding-left:18px;color:#cbd5e1}
+
+    .accordion{margin-top:8px}
+    .acc-item{border:1px solid rgba(148,163,184,.16);border-radius:14px;margin:10px 0;overflow:hidden;background:rgba(2,6,23,.5)}
+    .acc-head{width:100%;text-align:left;background:transparent;border:none;color:var(--text);padding:14px 16px;font-weight:700;cursor:pointer;display:flex;justify-content:space-between;align-items:center}
+    .acc-body{display:none;padding:0 16px 14px 16px;color:#cbd5e1}
+    .acc-item.open .acc-body{display:block}
+
+    .ribbon{position:absolute;right:12px;top:12px;background:linear-gradient(135deg,var(--brand),var(--brand-2));color:white;padding:8px 12px;border-radius:999px;font-weight:800;box-shadow:var(--shadow)}
+
+    .footer{display:flex;flex-wrap:wrap;align-items:center;gap:16px;justify-content:space-between;margin-top:20px;padding:16px;border:1px dashed rgba(148,163,184,.28);border-radius:16px}
+    .copy{font-family:ui-monospace,Menlo,Consolas,monospace;background:rgba(148,163,184,.12);padding:8px 10px;border-radius:10px;cursor:pointer}
+
+    .pulse{position:absolute;inset:-30px;background:radial-gradient(400px 180px at 30% 10%, rgba(20,184,166,.25), transparent 60%),radial-gradient(400px 200px at 80% 20%, rgba(99,102,241,.22), transparent 60%);filter:blur(20px);opacity:.9;pointer-events:none}
+
+    @media (max-width: 900px){
+      .hero-grid{grid-template-columns:1fr}
+      .grid{grid-template-columns:1fr}
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <section class="hero">
+      <div class="pulse"></div>
+      <div class="ribbon">$60</div>
+      <div class="hero-grid">
+        <div>
+          <div class="badge">HTML & CSS • Basics ➜ Advanced • Live Project</div>
+          <h1 class="title">Master HTML & CSS — build real projects and learn how to earn</h1>
+          <p class="subtitle">Project‑based, detailed lessons with recorded sessions at a fixed time. We start from zero and go advanced with a complete live project. I also show practical ways to earn using your new skills.</p>
+
+          <div class="features">
+            <div class="chip">📅 Fixed class time</div>
+            <div class="chip">🎥 Recorded sessions</div>
+            <div class="chip">🧩 Project‑based</div>
+            <div class="chip">🔎 Detailed learning</div>
+            <div class="chip">💸 How to earn with it</div>
+          </div>
+
+          <div class="cta">
+            <a class="btn primary" id="enrollBtn" href="mailto:binteadeel4@gmail.com?subject=Enroll%20—%20HTML%20%26%20CSS%20Course%20($60)&body=Hi!%20I%20want%20to%20enroll.%20Please%20share%20the%20class%20time%20and%20next%20steps.">Enroll now — $60</a>
+            <button class="btn ghost" id="earnBtn" type="button">See earning paths</button>
+          </div>
+          <div class="mini">Email: <span class="copy" id="copyEmail" title="Click to copy">binteadeel4@gmail.com</span> • Response within 24 hours</div>
+        </div>
+
+        <aside class="price-card">
+          <h3 style="margin:4px 0 10px">What you get</h3>
+          <ul class="list">
+            <li>Basics ➜ Advanced HTML & CSS</li>
+            <li>Responsive layouts (Flexbox & Grid)</li>
+            <li>Component‑driven styling & best practices</li>
+            <li>One full live project from scratch</li>
+            <li>Assignments and feedback</li>
+            <li>Recorded videos for revision</li>
+            <li>Tips to start earning</li>
+          </ul>
+          <div style="margin-top:12px">
+            <div class="price">$60</div>
+            <div class="mini">One‑time fee • No hidden charges</div>
+          </div>
+        </aside>
+      </div>
+
+      <div class="tabs" style="margin-top:20px">
+        <div class="tab-head">
+          <button class="tab-btn active" data-tab="t1">Basics</button>
+          <button class="tab-btn" data-tab="t2">Advanced</button>
+          <button class="tab-btn" data-tab="t3">Live Project</button>
+          <button class="tab-btn" data-tab="t4">Outline</button>
+          <button class="tab-btn" data-tab="t5">FAQs</button>
+        </div>
+        <div class="tab-panels">
+          <div id="t1" class="panel active">
+            <div class="grid">
+              <div class="card">
+                <h4>HTML Foundations</h4>
+                <ul class="list">
+                  <li>Structure, tags, semantics</li>
+                  <li>Links, images, forms, tables</li>
+                  <li>Clean, accessible markup</li>
+                </ul>
+              </div>
+              <div class="card">
+                <h4>CSS Essentials</h4>
+                <ul class="list">
+                  <li>Selectors & cascade</li>
+                  <li>Box model & positioning</li>
+                  <li>Typography & colors</li>
+                </ul>
+              </div>
+              <div class="card">
+                <h4>Responsive Basics</h4>
+                <ul class="list">
+                  <li>Media queries</li>
+                  <li>Flexbox intro</li>
+                  <li>Mobile‑first thinking</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <div id="t2" class="panel">
+            <div class="grid">
+              <div class="card">
+                <h4>Modern Layouts</h4>
+                <ul class="list">
+                  <li>Flexbox deep dive</li>
+                  <li>CSS Grid patterns</li>
+                  <li>Fluid, clamp & container queries</li>
+                </ul>
+              </div>
+              <div class="card">
+                <h4>Components & Utilities</h4>
+                <ul class="list">
+                  <li>Buttons, cards, navbars</li>
+                  <li>Design tokens & variables</li>
+                  <li>Animations & transitions</li>
+                </ul>
+              </div>
+              <div class="card">
+                <h4>Best Practices</h4>
+                <ul class="list">
+                  <li>Accessibility basics</li>
+                  <li>File structure & naming</li>
+                  <li>Performance tips</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <div id="t3" class="panel">
+            <div class="grid">
+              <div class="card">
+                <h4>Project Goal</h4>
+                <p style="color:#cbd5e1">Build a polished, responsive website from scratch (landing page or portfolio) using semantic HTML, modern CSS, and clean components.</p>
+              </div>
+              <div class="card">
+                <h4>Process</h4>
+                <ul class="list">
+                  <li>Wireframe ➜ layout ➜ components</li>
+                  <li>Responsive breakpoints</li>
+                  <li>Refine with animation & polish</li>
+                </ul>
+              </div>
+              <div class="card">
+                <h4>Deliverables</h4>
+                <ul class="list">
+                  <li>Live website</li>
+                  <li>Source code</li>
+                  <li>Project walkthrough recording</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <div id="t4" class="panel">
+            <div class="accordion" id="outline">
+              <div class="acc-item open">
+                <button class="acc-head">Course Outline <span>▼</span></button>
+                <div class="acc-body">
+                  <p style="margin:8px 0 10px">Paste your detailed outline here later and it will auto‑format. Example:</p>
+                  <ul class="list">
+                    <li>Phase 1 — Getting Started with HTML</li>
+                    <li>Phase 2 — CSS Fundamentals</li>
+                    <li>Phase 3 — Responsive Design (Flexbox & Grid)</li>
+                    <li>Phase 4 — Components & Utilities</li>
+                    <li>Phase 5 — Live Project Build</li>
+                  </ul>
+                  <div class="mini">Tip: Double‑click items to edit. Press Enter to save.</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div id="t5" class="panel">
+            <div class="accordion">
+              <div class="acc-item">
+                <button class="acc-head">Is the price really $60? <span>+</span></button>
+                <div class="acc-body">Yes — a single one‑time fee of <strong>$60</strong> for the whole course.</div>
+              </div>
+              <div class="acc-item">
+                <button class="acc-head">How are classes scheduled? <span>+</span></button>
+                <div class="acc-body">Classes run at a <strong>fixed time</strong>. If you miss one, you’ll receive the <strong>recorded session</strong> for revision.</div>
+              </div>
+              <div class="acc-item">
+                <button class="acc-head">Do we do a real project? <span>+</span></button>
+                <div class="acc-body">Yes — we build a complete, responsive website from scratch together.</div>
+              </div>
+              <div class="acc-item">
+                <button class="acc-head">Will you show how to earn? <span>+</span></button>
+                <div class="acc-body">Absolutely. We discuss practical earning paths and prepare your first portfolio to start pitching.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <footer class="footer">
+        <div>
+          <strong>Questions?</strong> Email me and I’ll reply soon.
+        </div>
+        <div>
+          <span class="copy" id="copyEmail2">binteadeel4@gmail.com</span>
+          <a class="btn primary" style="margin-left:10px" href="mailto:binteadeel4@gmail.com?subject=Enroll%20—%20HTML%20%26%20CSS%20Course%20($60)">Enroll</a>
+        </div>
+      </footer>
+    </section>
+  </div>
+
+  <script>
+    // Tabs
+    const tabs = document.querySelectorAll('.tab-btn');
+    const panels = document.querySelectorAll('.panel');
+    tabs.forEach(btn=>btn.addEventListener('click',()=>{
+      tabs.forEach(b=>b.classList.remove('active'));
+      btn.classList.add('active');
+      panels.forEach(p=>p.classList.remove('active'));
+      document.getElementById(btn.dataset.tab).classList.add('active');
+    }));
+
+    // Accordion
+    document.querySelectorAll('.acc-head').forEach(h=>{
+      h.addEventListener('click',()=>{
+        const item=h.closest('.acc-item');
+        item.classList.toggle('open');
+        h.querySelector('span').textContent=item.classList.contains('open')?'▼':'+';
+      })
+    });
+
+    // Copy email
+    function copyEmail(el){
+      const email='binteadeel4@gmail.com';
+      navigator.clipboard.writeText(email).then(()=>{
+        const old=el.textContent; el.textContent='Copied!';
+        setTimeout(()=>el.textContent=old,1200);
+      })
+    }
+    document.getElementById('copyEmail').addEventListener('click',e=>copyEmail(e.target));
+    document.getElementById('copyEmail2').addEventListener('click',e=>copyEmail(e.target));
+
+    // Earning paths modal (lightweight)
+    const earnBtn=document.getElementById('earnBtn');
+    earnBtn.addEventListener('click',()=>{
+      const wrap=document.createElement('div');
+      wrap.style.position='fixed';wrap.style.inset='0';wrap.style.background='rgba(2,6,23,.7)';wrap.style.backdropFilter='blur(6px)';wrap.style.display='grid';wrap.style.placeItems='center';wrap.style.zIndex=50;
+      const modal=document.createElement('div');
+      modal.style.maxWidth='720px';modal.style.margin='20px';modal.style.background='var(--card)';modal.style.border='1px solid rgba(148,163,184,.25)';modal.style.borderRadius='20px';modal.style.boxShadow='var(--shadow)';modal.style.padding='18px';
+      modal.innerHTML=`
+        <div style="display:flex;justify-content:space-between;align-items:center;gap:10px">
+          <h3 style="margin:0">Earning paths with HTML & CSS</h3>
+          <button id="closeEarn" class="btn ghost" style="padding:8px 10px">✕</button>
+        </div>
+        <div class="grid" style="margin-top:10px">
+          <div class="card">
+            <h4>Freelance gigs</h4>
+            <ul class="list">
+              <li>Landing pages for small businesses</li>
+              <li>Email signatures & simple sites</li>
+              <li>Fix responsive issues</li>
+            </ul>
+          </div>
+          <div class="card">
+            <h4>Local clients</h4>
+            <ul class="list">
+              <li>Restaurant/menu sites</li>
+              <li>Salon/clinic appointment pages</li>
+              <li>Event/portfolio pages</li>
+            </ul>
+          </div>
+          <div class="card">
+            <h4>Products & templates</h4>
+            <ul class="list">
+              <li>Sell website templates</li>
+              <li>Custom components & UI kits</li>
+              <li>Theme customization</li>
+            </ul>
+          </div>
+        </div>
+        <div class="mini">We’ll prepare your first portfolio page during the live project so you can start pitching immediately.</div>
+      `;
+      wrap.appendChild(modal);
+      document.body.appendChild(wrap);
+      wrap.addEventListener('click',e=>{ if(e.target===wrap) wrap.remove(); });
+      modal.querySelector('#closeEarn').addEventListener('click',()=>wrap.remove());
+    });
+
+    // Inline editing for Outline items
+    document.querySelectorAll('#outline .list li').forEach(li=>{
+      li.addEventListener('dblclick',()=>{
+        const txt=li.textContent; const input=document.createElement('input');
+        input.value=txt; input.style.width='100%'; input.style.padding='6px 8px'; input.style.borderRadius='8px'; input.style.border='1px solid rgba(148,163,184,.35)'; input.style.background='rgba(2,6,23,.4)'; input.style.color='var(--text)';
+        li.replaceWith(input); input.focus();
+        input.addEventListener('keydown',ev=>{ if(ev.key==='Enter'){ const nli=document.createElement('li'); nli.textContent=input.value; nli.className=''; input.replaceWith(nli); } });
+        input.addEventListener('blur',()=>{ const nli=document.createElement('li'); nli.textContent=input.value; input.replaceWith(nli); });
+      })
+    });
+  </script>
+</body>
+</html>
